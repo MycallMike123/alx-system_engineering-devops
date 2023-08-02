@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -d . .. *[0-9a-zA-Z]* | sort -d -k1,1
+ls -la | awk '{if ($9 ~ /^[0-9a-zA-Z]/) printf $9","; else printf $9"/,"}'
