@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -A1 | sort -d | tr '\n' ','; echo
+(echo * .[^.]* | tr ' ' '\n' | sort -df | paste -sd',' -) | sed 's/,/, /g'
