@@ -1,0 +1,2 @@
+#!/bin/bash
+echo -e '#!/usr/bin/file\n0 string SCHOOL School data file' > school.mgc
