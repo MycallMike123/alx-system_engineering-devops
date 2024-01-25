@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# This script displays numbers from 1 to 20 and specific messages for certain iterations
+
+cnt=1
+
+while [ $cnt -le 20 ]; do
+	case $cnt in
+	4)
+		echo "bad luck from China"
+		;;
+	9)
+		echo "bad luck from Japan"
+		;;
+	17)
+		echo "bad luck from Italy"
+		;;
+	*)
+		echo $cnt
+		;;
+	esac
+
+	((cnt++))
+done
