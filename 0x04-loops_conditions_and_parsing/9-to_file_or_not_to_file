@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # This script provides information about the school file
 
-path="school"
+f_path="school"
 
-if [ -e "$path" ]; then
+if [ -e "$f_path" ]; then
 	echo "school file exists"
 
-	if [ -s "$path" ]; then
+	if [ -s "$f_path" ]; then
 		echo "school file is not empty"
 
-		if [ -f "$path" ]; then
+		if [ -f "$f_path" ]; then
 			echo "school is a regular file"
 		else
 		# File is not a regular file
