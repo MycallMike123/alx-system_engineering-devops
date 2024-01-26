@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#The process to be managed
+
+path="/tmp/my_process"
+
+while true; do
+	echo "I am alive!" >> "$path"
+	sleep 2
+done
