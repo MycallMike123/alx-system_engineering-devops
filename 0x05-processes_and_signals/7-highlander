@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Description: Displays "To infinity and beyond indefinitely" with a 2-second sleep between iterations
 
-trap 'echo "I am invincible!!!"; exit 0' SIGTERM
+trap 'echo I am invincible!!!' SIGTERM
 
 while true; do
 	echo "To infinity and beyond"
