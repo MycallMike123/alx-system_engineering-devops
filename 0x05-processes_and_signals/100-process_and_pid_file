@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Description: Performs various actions on signals.
+
+echo $$ > /var/run/myscript.pid
+
+trap 'echo "I hate the kill command"; exit 0' SIGTERM
+trap 'echo "Y U no love me?!";' SIGINT
+
+terminate_script() {
+	echo "Y U no love me?!"
+	rm -f /var/run/myscript.pid
+	exit 0
+}
+
+trap terminate_script SIGQUIT
+
+while true; do
+	echo "To infinity and beyond"
+	sleep 2
+done
