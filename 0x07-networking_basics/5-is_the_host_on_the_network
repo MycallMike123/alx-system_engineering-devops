@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Check if an IP address is online using ICMP (ping)
+
+# Extract the IP address from the command-line argument
+IP="${1}"
+
+fn=$(basename "${BASH_SOURCE[@]}")
+
+# Check the exit status of the ping command
+if ! [ "$IP" ]; then
+	echo "Usage: ${fn} {IP_ADDRESS}"
+else
+	ping -c 5 "${IP}"
+fi
