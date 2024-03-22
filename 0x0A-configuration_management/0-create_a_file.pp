@@ -1,10 +1,10 @@
-# Creates a file
+# Creates a file using puppet
 
 file { '/tmp/school':
-  ensure  => file,	# Ensure it's a file
+  ensure  => file,
   path    => '/tmp/school',
-  mode    => '0744',	# Set file permissions
-  owner   => 'www-data',	# Set owner
-  group   => 'www-data',	# Set group
-  content => 'I love Puppet'	# Set file content
+  mode    => '0744',
+  owner   => 'www-data',
+  group   => 'www-data',
+  content => 'I love Puppet'
 }
