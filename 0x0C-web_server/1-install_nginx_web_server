@@ -1,37 +1,21 @@
 #!/usr/bin/env bash
+# Requirements:
 
-# Configures a new ubuntu machine through installing
-# Nginx where it should be listening on port 80
-# Serve a page that returns a Hello World string
+# Install nginx on your web-01
+# server
+# Nginx should be listening on port 80
 
-blue='\e[1;34m'
-brown='\e[0;33m'
-green='\e[1;32m'
-reset='\033[0m'
+# Check if nginx is installed
 
-echo -e "${blue}Updating and installing ${brown}Nginx${blue}.${reset}\n"
-sudo apt-get update -y -qq && \
-	 sudo apt-get install nginx -y
+# Update package list and install nginx
+sudo apt-get -y update
+sudo apt-get install -y nginx
 
-echo -e "\n${blue}Setting up some minor stuff.${reset}\n"
+# Ensure nginx is listening to port 80
+ufw allow 'Nginx HTTP'
 
-# starting nginx service
-sudo service nginx start
+# Set up the default page
+echo "Hello World!" > /var/www/html/index.html
 
-# allowing nginx on firewall
-sudo ufw allow 'Nginx HTTP'
-
-# Give the user ownership to website files for easy editing
-sudo chown -R "$USER":"$USER" /var/www/html
-sudo chmod -R 755 /var/www
-
-# Backup default idx
-cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
-
-# Create new idx
-echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
-
-# Restart nginx
+# Restart nginx (without using systemctl)
 sudo service nginx restart
-
-echo -e "\n${green}Completed.${reset} ✅\n"
