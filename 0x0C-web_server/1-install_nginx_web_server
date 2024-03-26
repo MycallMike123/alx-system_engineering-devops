@@ -12,5 +12,5 @@ ufw allow 'Nginx HTTP'
 # Set up the default page
 echo "Hello World!" > /var/www/html/index.html
 
-# Restart nginx (with/o using systemctl)
+# Restart nginx (witho using systemctl)
 sudo service nginx restart
