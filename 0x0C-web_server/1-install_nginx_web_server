@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
+# Requirements:
 
 # Install nginx on your web-01
+# server
+# Nginx should be listening on port 80
+
+# Check if nginx is installed
 
 # Update package list and install nginx
 sudo apt-get -y update
@@ -12,5 +17,6 @@ ufw allow 'Nginx HTTP'
 # Set up the default page
 echo "Hello World!" > /var/www/html/index.html
 
-# Restart nginx (witho using systemctl)
+# Restart nginx (without using systemctl)
 sudo service nginx restart
+
