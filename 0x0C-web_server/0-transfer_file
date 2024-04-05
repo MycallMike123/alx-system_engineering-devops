@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # transfers a file from the client's server using scp
 
 PATH_TO_FILE=$1;
