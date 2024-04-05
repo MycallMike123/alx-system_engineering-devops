@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Configure web-02 to be identical with web-01
-# Next
 
 # Update package info
 sudo apt-get -y update
