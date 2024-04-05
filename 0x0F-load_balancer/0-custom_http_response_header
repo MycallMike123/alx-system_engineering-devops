@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Configure web-02 to be identical with web-01
 
 # Update package info
