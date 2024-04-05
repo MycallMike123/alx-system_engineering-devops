@@ -2,4 +2,4 @@ eval $("ssh-agent")
 
 ssh-add ~/.ssh/id_rsa
 
-ssh ubuntu@100.25.144.211
+ssh ubuntu@54.234.60.152
