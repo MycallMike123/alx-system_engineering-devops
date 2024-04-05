@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# A Bash script with the minimum number of commands to automate your fix
+
+# Install Nginx if it si not already installed
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Update Nginx default configuration to listen on port 80
+echo "server { listen 80; }" | sudo tee /etc/nginx/sites-available/default > /dev/null
+
+# Create a symbolic link to enable the default site
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# Restart Nginx
+sudo service nginx restart
