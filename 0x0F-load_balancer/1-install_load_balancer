@@ -9,15 +9,15 @@ apt-get -y install haproxy
 # edit config file
 server_config=\
 "
-frontend  cobby-frontend
+frontend  mycall123-frontend
         bind *:80
         mode http
-        default_backend cobby-backend
+        default_backend mycall123-backend
 
-backend cobby-backend
+backend mycall123-backend
         balance roundrobin
-        server 495650-web-01 34.203.33.40 check
-        server 495650-web-02 100.27.10.8 check
+        server 495650-web-01 54.234.60.152 check
+        server 495650-web-02 54.146.94.81 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
