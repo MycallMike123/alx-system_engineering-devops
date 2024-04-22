@@ -20,29 +20,22 @@ def fetch_todo_progress(employee_id):
     """
 
     # URL of the API endpoint
-    url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
-    try:
-        # Fetch data from the API
-        response = requests.get(url)
-        data = response.json()
+    response = requests.get(user_url)
+    data = response.json()
+    employee_name = data.get('name')
 
-        # Extract employee name
-        employee_name = data[0]['name'].split()[0]
+    # Fetch TODO list for the employee
+    todos_response = requests.get(todos_url)
+    todos_data = todos_response.json()
 
-        # Calculate progress
-        total_tasks = len(data)
-        done_tasks = sum(1 for task in data if task['completed'])
+    # Display progress
+    print("Employee {} is done with tasks ({}/{}):".format(
+        employee_name, completed_tasks, total_tasks), end='\n')
 
-        # Display progress
-        status = 'OK'
-        print(f"Employee {employee_name}: {status}")
-        for task in data:
-            if task['completed']:
-                print(f"\t{task['title']}")
-
-    except requests.exceptions.RequestException as e:
-        print(f"Error: {e}")
-        sys.exit(1)
+    # Display titles of completed tasks
+    for task in todos_data:
+        if task.get('completed', False):
+            print("\t {}".format(task.get("title")))
 
 
 if __name__ == "__main__":
