@@ -34,7 +34,7 @@ def fetch_todo_progress(employee_id):
         done_tasks = sum(1 for task in data if task['completed'])
 
         # Display progress
-        status = 'OK' if done_tasks == total_tasks else 'Incorrect'
+        status = 'OK' if done_tasks == total_tasks
         print(f"Employee {employee_name}: {status}")
         for task in data:
             if task['completed']:
