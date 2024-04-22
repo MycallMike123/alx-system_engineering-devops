@@ -1,27 +1,22 @@
 #!/usr/bin/python3
 
-"""
-Script to retrieve and display TODO list progress for a given employee
-using a REST API.
 
-Requirements:
-- Use urllib or requests module
-- Accept an integer as a parameter (employee ID)
-- Display progress information in the specified format
+"""Module: employee_todo.py
+Fetches and displays TODO list progress for a given employee
+ID using a REST API
 """
 
 import requests
 import sys
 
 
-def get_employee_todo_progress(employee_id):
-    """ Fetches and displays TODO list progress for a given employee.
-
-    Args:
-    - employee_id (int): ID of the employee to retrieve TODO list for.
-
-    Returns:
-    - None
+def fetch_todo_progress(employee_id):
+    """
+    Function: fetch_todo_progress
+    Fetches TODO list progress for a given employee ID.
+    Parameters:
+        - employee_id: Integer, employee ID
+    Returns: None
     """
     base_url = "https://jsonplaceholder.typicode.com"
     user_url = "{}/users/{}".format(base_url, employee_id)
@@ -40,11 +35,9 @@ def get_employee_todo_progress(employee_id):
     total_tasks = len(todos_data)
     completed_tasks = sum(task.get("completed", False) for task in todos_data)
 
-    # Display progress information
+    # Display progress
     print("Employee {} is done with tasks ({}/{}):".format(
         employee_name, completed_tasks, total_tasks), end='\n')
-    # print("{}: {} completed tasks out of {}".format(
-    # employee_name, completed_tasks, total_tasks))
 
     # Display titles of completed tasks
     for task in todos_data:
@@ -53,13 +46,10 @@ def get_employee_todo_progress(employee_id):
 
 
 if __name__ == "__main__":
-    # Check if the correct number of command-line arguments is provided
     if len(sys.argv) != 2:
         print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
         sys.exit(1)
 
     # Extract employee ID from command-line arguments
     employee_id = int(sys.argv[1])
-
-    # Call the function to get and display TODO list progress
-    get_employee_todo_progress(employee_id)
+    fetch_todo_progress(employee_id)
