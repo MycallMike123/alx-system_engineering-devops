@@ -66,4 +66,5 @@ if __name__ == "__main__":
 
     # Extract employee ID from command-line arguments
     employee_id = sys.argv[1]
+
     fetch_todo_progress(employee_id)
