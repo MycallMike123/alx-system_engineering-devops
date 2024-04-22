@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-
-
 """Module: employee_todo.py
 Fetches and displays TODO list progress for a given employee
 ID using a REST API
