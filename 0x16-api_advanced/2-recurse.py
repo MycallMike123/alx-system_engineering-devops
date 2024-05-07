@@ -8,16 +8,19 @@ after = None
 
 def recurse(subreddit, hot_list=[]):
     """
-    Recursively queries the Reddit API and returns a list containing the titles of all hot articles for a given subreddit.
+    Recursively queries the Reddit API and returns a list containing
+    the titles of all hot articles for a given subreddit.
 
     Args:
         subreddit (str): The name of the subreddit.
-        hot_list (list): A list to store the titles of hot articles. Defaults to an empty list.
+        hot_list (list): A list to store the titles of hot articles.
+        Defaults to an empty list.
 
     Returns:
-        list: A list containing the titles of all hot articles for the given subreddit, or None if no results are found.
+        list: A list containing the titles of all hot articles for
+        the given subreddit, or None if no results are found
         """
-        global after
+    global after
     user_agent = {'User-Agent': 'api_advanced-project'}
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     parameters = {'after': after}
