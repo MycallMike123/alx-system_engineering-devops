@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Number of subscribers for a given subreddit"""
 
-from requests import get
+import requests
 
 
 def number_of_subscribers(subreddit):
@@ -14,13 +14,12 @@ def number_of_subscribers(subreddit):
     Returns:
         int: The number of subscribers, or 0 if the subreddit is invalid.
     """
-    user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
-    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
-    response = get(url, headers=user_agent)
-    results = response.json()
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    headers = {'User-Agent': 'Custom User Agent'}
+    response = requests.get(url, headers=headers)
 
-    try:
-        return results.get('data').get('subscribers')
-
-    except Exception:
+    if response.status_code == 200:
+        data = response.json()
+        return data['data']['subscribers']
+    else:
         return 0
