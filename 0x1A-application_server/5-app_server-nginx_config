@@ -1,0 +1,60 @@
+server {
+    # Listen for HTTP requests on port 80
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    # Define the root directory for serving files
+    root /var/www/html;
+
+    # Define the default index files
+    index index.html index.htm index.nginx-debian.html;
+
+    # Define server name (replace with actual server name)
+    server_name _;
+
+    # Add a custom header indicating which server handled the request
+    add_header X-Served-By $hostname;
+
+    # Location block for serving static files under '/hbnb_static'
+    location /hbnb_static {
+        alias /data/web_static/current/;
+    }
+
+    # Location block for serving static files under '/static/'
+    location /static/ {
+        alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+        try_files $uri $uri/ =404;
+    }
+
+    # Location block for handling root requests
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # Location block for proxying requests to '/airbnb-onepage' to a backend server
+    location /airbnb-onepage {
+        proxy_pass http://0.0.0.0:5000/airbnb-onepage;
+    }
+
+    # Location block for proxying requests to
+    # '/airbnb-dynamic/number_odd_or_even/<number>' to a backend server
+    location ~ ^/airbnb-dynamic/number_odd_or_even/([0-9]+)$ {
+        proxy_pass http://0.0.0.0:5001/number_odd_or_even/$1;
+    }
+
+    # Location block for proxying requests to '/api/' to a backend server
+    location /api/ {
+        proxy_pass http://0.0.0.0:5002;
+    }
+
+    # Conditional redirect based on request filename
+    if ($request_filename ~ redirect_me){
+        rewrite ^ https://th3-gr00t.tk/ permanent;
+    }
+
+    # Error page configuration for 404 errors
+    error_page 404 /error_404.html;
+    location = /error_404.html {
+        internal;
+    }
+}
