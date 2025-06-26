@@ -1,7 +1,7 @@
 #A SSH config file for the local SSH client
 
 Host web-01
-	Hostname 52.206.199.245
+	Hostname 495650-web-01
 	User ubuntu
 	PasswordAuthentication no
 	IdentityFile ~/.ssh/school
