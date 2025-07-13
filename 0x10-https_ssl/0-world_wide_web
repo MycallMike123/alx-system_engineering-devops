@@ -1,36 +1,27 @@
-#!/usr/bin/env bash
-# A bash script that displays info abt domains
+#!/bin/bash
+# shellcheck disable=SC2086
 
-# Function to display information about a subdomain
 get_subdomain_info() {
-    local domain="$1"
-    local subdomain="$2"
+    local DOMAIN=$1
+    local SUB=$2
+    local FQDN="$SUB.$DOMAIN"
 
-    # Query DNS records for the specified subdomain
-    local dns_info
-    dns_info=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION/ {getline; print}')
+    INFO=$(dig $FQDN | grep -A1 'ANSWER SECTION:' | tail -n1)
 
-    # Parse the DNS information and extract relevant details
-    local record_type
-    record_type=$(echo "$dns_info" | awk '{print $4}')
-    local destination
-    destination=$(echo "$dns_info" | awk '{print $5}')
+    RECORD_TYPE=$(echo $INFO | awk '{print $4}')
+    DESTINATION=$(echo $INFO | awk '{print $5}')
 
-    echo "The subdomain $subdomain is a $record_type record and points to $destination"
+    echo "The subdomain $SUB is a $RECORD_TYPE record and points to $DESTINATION"
 }
 
-# Beginning of the main script
-domain="$1"
-subdomain="$2"
+DOMAIN=$1
+SUBDOMAIN=$2
 
-# If subdomain is not specified, display info for default subdomains
-if [ -z "$subdomain" ]; then
-    get_subdomain_info "$domain" "www"
-    get_subdomain_info "$domain" "lb-01"
-    get_subdomain_info "$domain" "web-01"
-    get_subdomain_info "$domain" "web-02"
-
+if [ -n "$SUBDOMAIN" ]; then
+    get_subdomain_info $DOMAIN $SUBDOMAIN
 else
-    # Display subdomain info
-    get_subdomain_info "$domain" "$subdomain"
+    for sub in www lb-01 web-01 web-02; do
+        get_subdomain_info $DOMAIN $sub
+    done
 fi
+
